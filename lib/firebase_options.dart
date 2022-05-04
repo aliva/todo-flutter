@@ -40,17 +40,17 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyCAm25zYuR_yprMkdNgq52JexLo8lCYzBQ',
-    appId: '1:1024782932961:web:0cd74ee68458abfde590a0',
+    appId: '1:1024782932961:web:af9105ff341523dbe590a0',
     messagingSenderId: '1024782932961',
     projectId: 'todo-flutter-349218',
     authDomain: 'todo-flutter-349218.firebaseapp.com',
     storageBucket: 'todo-flutter-349218.appspot.com',
-    measurementId: 'G-13JX2ZSNJM',
+    measurementId: 'G-SCYWF5MHCS',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCxHWVbE3_gS-P55n11UnPebAo7RrK-_dY',
-    appId: '1:1024782932961:android:abc88dde2d950ee8e590a0',
+    appId: '1:1024782932961:android:3d69a71f77ae27cee590a0',
     messagingSenderId: '1024782932961',
     projectId: 'todo-flutter-349218',
     storageBucket: 'todo-flutter-349218.appspot.com',

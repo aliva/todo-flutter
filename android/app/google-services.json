@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1024782932961:android:abc88dde2d950ee8e590a0",
+        "mobilesdk_app_id": "1:1024782932961:android:3d69a71f77ae27cee590a0",
         "android_client_info": {
-          "package_name": "com.example.todo"
+          "package_name": "com.github.aliva.todo_flutter"
         }
       },
       "oauth_client": [
