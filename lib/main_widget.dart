@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:todo/todo_items.dart';
-
 import 'add_page.dart';
 import 'bottom_bar.dart';
+import 'profile.dart';
+import 'todo_list.dart';
 
 class MainWidget extends StatefulWidget {
   const MainWidget({Key? key}) : super(key: key);
@@ -12,12 +13,12 @@ class MainWidget extends StatefulWidget {
 }
 
 class _MainWidgetState extends State<MainWidget> {
-  final todoItems = <TodoItem>[];
+  final _todoItems = <TodoItem>[];
   int _currentPanelIndex = 0;
 
   void addTodoItem(String text) {
     setState(() {
-      todoItems.add(TodoItem(text: text));
+      _todoItems.add(TodoItem(text: text));
     });
   }
 
@@ -35,6 +36,26 @@ class _MainWidgetState extends State<MainWidget> {
     });
   }
 
+  void toggleState(int index) {
+    setState(() {
+      _todoItems[index].value = !_todoItems[index].value;
+    });
+  }
+
+  Widget _getBody() {
+    switch (_currentPanelIndex) {
+      case 0:
+        return TodoList(
+          todoItems: _todoItems,
+          toggleState: toggleState,
+        );
+      case 1:
+        return const Profile();
+      default:
+        throw Exception("Uknown page");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,28 +63,12 @@ class _MainWidgetState extends State<MainWidget> {
         onPressed: onAddPressed,
         child: const Icon(Icons.add),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       bottomNavigationBar: BottomBar(
         currentPanel: _currentPanelIndex,
         setActivePanel: setActivePanel,
       ),
-      body: ListView.separated(
-        itemBuilder: (BuildContext context, int index) {
-          return CheckboxListTile(
-            value: todoItems[index].value,
-            title: Text(todoItems[index].text),
-            onChanged: (value) {
-              setState(() {
-                todoItems[index].value = !todoItems[index].value;
-              });
-            },
-          );
-        },
-        separatorBuilder: (BuildContext context, int index) {
-          return const Divider();
-        },
-        itemCount: todoItems.length,
-      ),
+      body: _getBody(),
     );
   }
 }
