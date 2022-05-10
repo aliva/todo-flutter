@@ -25,6 +25,7 @@ class _MainWidgetState extends State<MainWidget> {
     DatabaseReference ref = FirebaseDatabase.instance.ref("todos/$userId/$newItemKey");
     ref.set({
       "text": text,
+      "created_at": ServerValue.timestamp,
     });
 
     setState(() {
