@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:todo/todo_items.dart';
 import 'add_page.dart';
@@ -17,6 +19,14 @@ class _MainWidgetState extends State<MainWidget> {
   int _currentPanelIndex = 0;
 
   void addTodoItem(String text) {
+    final userId = FirebaseAuth.instance.currentUser!.uid;
+    final newItemKey = FirebaseDatabase.instance.ref().child("todos/$userId").push().key;
+
+    DatabaseReference ref = FirebaseDatabase.instance.ref("todos/$userId/$newItemKey");
+    ref.set({
+      "text": text,
+    });
+
     setState(() {
       _todoItems.add(TodoItem(text: text));
     });
