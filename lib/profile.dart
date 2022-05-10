@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_ui/auth.dart';
 
+import 'profile_signedin.dart';
+
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
 
@@ -17,7 +19,7 @@ class _ProfileState extends State<Profile> {
       initialData: FirebaseAuth.instance.currentUser,
       builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
         if (snapshot.hasData) {
-          return const Center(child: Text("HI"));
+          return const Center(child: ProfileSignedin());
         } else {
           return const SignInScreen(
             showAuthActionSwitch: false,
