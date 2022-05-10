@@ -12,14 +12,21 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
-    if (FirebaseAuth.instance.currentUser != null) {
-      return const Center(child: Text("HI"));
-    }
-    return const SignInScreen(
-      showAuthActionSwitch: false,
-      providerConfigs: [
-        EmailProviderConfiguration(),
-      ],
+    return StreamBuilder<User?>(
+      stream: FirebaseAuth.instance.userChanges(),
+      initialData: FirebaseAuth.instance.currentUser,
+      builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
+        if (snapshot.hasData) {
+          return const Center(child: Text("HI"));
+        } else {
+          return const SignInScreen(
+            showAuthActionSwitch: false,
+            providerConfigs: [
+              EmailProviderConfiguration(),
+            ],
+          );
+        }
+      },
     );
   }
 }
