@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class AddPage extends StatefulWidget {
-  final Function addTodoItem;
+import 'storage.dart';
 
-  const AddPage({Key? key, required this.addTodoItem}) : super(key: key);
+class AddPage extends StatefulWidget {
+  const AddPage({Key? key}) : super(key: key);
 
   @override
   State<AddPage> createState() => _AddPageState();
@@ -11,7 +11,7 @@ class AddPage extends StatefulWidget {
 
 class _AddPageState extends State<AddPage> {
   void onSubmitted(text) {
-    widget.addTodoItem(text);
+    Storage().addTodoItem(text);
     Navigator.pop(context);
   }
 
