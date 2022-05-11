@@ -1,31 +1,32 @@
 import 'package:flutter/material.dart';
 
-import 'todo_items.dart';
+import 'models.dart';
+import 'storage.dart';
 
 class TodoList extends StatelessWidget {
   const TodoList({
     Key? key,
-    required this.todoItems,
-    required this.toggleState,
+    required this.tasks,
   }) : super(key: key);
 
-  final List<TodoItem> todoItems;
-  final Function(int) toggleState;
+  final List<Task> tasks;
 
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
       itemBuilder: (BuildContext context, int index) {
         return CheckboxListTile(
-          value: todoItems[index].value,
-          title: Text(todoItems[index].text),
-          onChanged: (value) {},
+          value: tasks[index].state == TaskState.done ? true : false,
+          title: Text(tasks[index].text),
+          onChanged: (value) {
+            Storage().toggleTodoState(tasks[index]);
+          },
         );
       },
       separatorBuilder: (BuildContext context, int index) {
         return const Divider();
       },
-      itemCount: todoItems.length,
+      itemCount: tasks.length,
     );
   }
 }

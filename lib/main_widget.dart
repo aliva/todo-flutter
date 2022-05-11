@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:todo/models.dart';
+import 'package:todo/storage.dart';
 
-import 'package:todo/todo_items.dart';
 import 'add_page.dart';
 import 'bottom_bar.dart';
 import 'profile.dart';
@@ -14,7 +15,7 @@ class MainWidget extends StatefulWidget {
 }
 
 class _MainWidgetState extends State<MainWidget> {
-  final _todoItems = <TodoItem>[];
+  var _tasks = <Task>[];
   int _currentPanelIndex = 0;
 
   void onAddPressed() {
@@ -29,24 +30,25 @@ class _MainWidgetState extends State<MainWidget> {
     });
   }
 
-  void toggleState(int index) {
-    setState(() {
-      _todoItems[index].value = !_todoItems[index].value;
-    });
-  }
-
   Widget _getBody() {
     switch (_currentPanelIndex) {
       case 0:
-        return TodoList(
-          todoItems: _todoItems,
-          toggleState: toggleState,
-        );
+        return TodoList(tasks: _tasks);
       case 1:
         return const Profile();
       default:
         throw Exception("Uknown page");
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    Storage().onTodoChangedHandler((List<Task> tasks) => {
+          setState(() {
+            _tasks = tasks;
+          })
+        });
   }
 
   @override

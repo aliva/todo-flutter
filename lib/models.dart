@@ -6,6 +6,7 @@ enum TaskState {
 }
 
 class Task {
+  final String? key;
   final String text;
   final TaskState state;
   // ignore: prefer_typing_uninitialized_variables
@@ -13,15 +14,23 @@ class Task {
 
   Task({
     required this.text,
+    this.key,
     this.state = TaskState.active,
     this.createdAt = ServerValue.timestamp,
   });
+
+  Task.fromJson(
+    this.key,
+    final json,
+  )   : text = json["text"],
+        state = TaskState.values[json["state"]],
+        createdAt = json["created_at"];
 
   Map<String, dynamic> toJson() {
     return {
       "text": text,
       "created_at": createdAt,
-      "state": createdAt,
+      "state": state.index,
     };
   }
 }
