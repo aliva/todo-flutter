@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'models.dart';
 import 'storage.dart';
 
 class AddPage extends StatefulWidget {
@@ -11,7 +12,7 @@ class AddPage extends StatefulWidget {
 
 class _AddPageState extends State<AddPage> {
   void onSubmitted(text) {
-    Storage().addTodoItem(text);
+    Storage().addTodoItem(Task(text: text));
     Navigator.pop(context);
   }
 
