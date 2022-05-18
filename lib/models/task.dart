@@ -1,9 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 
-enum TaskState {
-  active,
-  done,
-}
+import 'task_state.dart';
 
 class Task {
   final String? key;

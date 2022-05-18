@@ -1,0 +1,4 @@
+enum TaskState {
+  active,
+  done,
+}
