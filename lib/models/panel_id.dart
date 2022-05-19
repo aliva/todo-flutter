@@ -1,0 +1,4 @@
+enum PanelId {
+  home,
+  profile,
+}

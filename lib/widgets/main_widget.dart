@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo/models/panel_id.dart';
 import 'package:todo/widgets/add_page.dart';
 import 'package:todo/widgets/bottom_bar.dart';
 import 'package:todo/models/task.dart';
@@ -15,7 +16,7 @@ class MainWidget extends StatefulWidget {
 
 class _MainWidgetState extends State<MainWidget> {
   var _tasks = <Task>[];
-  int _currentPanelIndex = 0;
+  PanelId _activePanelId = PanelId.home;
 
   void onAddPressed() {
     Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) {
@@ -25,19 +26,18 @@ class _MainWidgetState extends State<MainWidget> {
 
   void setActivePanel(int index) {
     setState(() {
-      _currentPanelIndex = index;
+      _activePanelId = PanelId.values[index];
     });
   }
 
   Widget _getBody() {
-    switch (_currentPanelIndex) {
-      case 0:
-        return TodoList(tasks: _tasks);
-      case 1:
-        return const Profile();
-      default:
-        throw Exception("Uknown page");
+    if (_activePanelId == PanelId.home) {
+      return TodoList(tasks: _tasks);
     }
+    if (_activePanelId == PanelId.profile) {
+      return const Profile();
+    }
+    throw UnsupportedError("Uknown panel id");
   }
 
   @override
@@ -59,7 +59,7 @@ class _MainWidgetState extends State<MainWidget> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       bottomNavigationBar: BottomBar(
-        currentPanel: _currentPanelIndex,
+        currentPanel: _activePanelId.index,
         setActivePanel: setActivePanel,
       ),
       body: _getBody(),
