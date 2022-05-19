@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:todo/main_widget.dart';
+import 'package:todo/widgets/main_widget.dart';
 
 import 'firebase_options.dart';
 
