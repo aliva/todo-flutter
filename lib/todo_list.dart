@@ -15,7 +15,7 @@ class TodoList extends StatelessWidget {
     return ListView.separated(
       itemBuilder: (BuildContext context, int index) {
         return CheckboxListTile(
-          value: tasks[index].state.isActive() ? false : true,
+          value: tasks[index].state.isDone,
           title: Text(tasks[index].text),
           onChanged: (value) {
             Storage().toggleTodoState(tasks[index]);

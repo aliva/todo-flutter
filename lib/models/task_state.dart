@@ -27,7 +27,5 @@ class TaskState {
     throw UnsupportedError("Unkown task state");
   }
 
-  bool isActive() {
-    return _state == _TaskStateEnum.active;
-  }
+  bool get isDone => _state == _TaskStateEnum.done;
 }
