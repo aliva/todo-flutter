@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:todo/add_page.dart';
+import 'package:todo/bottom_bar.dart';
 import 'package:todo/models/task.dart';
+import 'package:todo/profile.dart';
 import 'package:todo/storage.dart';
-
-import 'add_page.dart';
-import 'bottom_bar.dart';
-import 'profile.dart';
-import 'todo_list.dart';
+import 'package:todo/todo_list.dart';
 
 class MainWidget extends StatefulWidget {
   const MainWidget({Key? key}) : super(key: key);

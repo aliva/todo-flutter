@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
-
-import 'models/task.dart';
+import 'package:todo/models/task.dart';
 
 class Storage {
   String get _uid => FirebaseAuth.instance.currentUser!.uid;

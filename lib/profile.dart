@@ -1,8 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_ui/auth.dart';
-
-import 'profile_signedin.dart';
+import 'package:todo/profile_signedin.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);

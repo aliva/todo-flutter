@@ -1,6 +1,5 @@
 import 'package:firebase_database/firebase_database.dart';
-
-import 'task_state.dart';
+import 'package:todo/models/task_state.dart';
 
 class Task {
   final String? key;
