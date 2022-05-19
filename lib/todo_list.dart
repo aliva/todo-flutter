@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'models/task.dart';
-import 'models/task_state.dart';
 import 'storage.dart';
 
 class TodoList extends StatelessWidget {
@@ -17,7 +16,7 @@ class TodoList extends StatelessWidget {
     return ListView.separated(
       itemBuilder: (BuildContext context, int index) {
         return CheckboxListTile(
-          value: tasks[index].state == TaskState.done ? true : false,
+          value: tasks[index].state.isActive() ? false : true,
           title: Text(tasks[index].text),
           onChanged: (value) {
             Storage().toggleTodoState(tasks[index]);

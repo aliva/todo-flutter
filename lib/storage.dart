@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 import 'models/task.dart';
-import 'models/task_state.dart';
 
 class Storage {
   String get _uid => FirebaseAuth.instance.currentUser!.uid;
@@ -15,12 +14,10 @@ class Storage {
 
   void toggleTodoState(Task task) {
     DatabaseReference ref = FirebaseDatabase.instance.ref("todos/$_uid/${task.key}");
-
-    if (task.state == TaskState.active) {
-      ref.update({"state": TaskState.done.index});
-    } else if (task.state == TaskState.done) {
-      ref.update({"state": TaskState.active.index});
-    }
+    task.state.toggleState();
+    ref.update({
+      "state": task.state.toString(),
+    });
   }
 
   void onTodoChangedHandler(Function(List<Task>) callback) {
