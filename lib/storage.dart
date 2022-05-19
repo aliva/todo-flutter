@@ -3,7 +3,8 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:todo/models/task.dart';
 
 class Storage {
-  String get _uid => FirebaseAuth.instance.currentUser!.uid;
+  static User? get currentUser => FirebaseAuth.instance.currentUser;
+  String get _uid => currentUser!.uid;
 
   void addTodoItem(Task task) {
     final key = FirebaseDatabase.instance.ref().child("todos/$_uid").push().key;

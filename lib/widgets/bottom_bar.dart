@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:todo/models/panel_id.dart';
 
 class BottomBar extends StatelessWidget {
-  const BottomBar({Key? key, this.currentPanel = 0, required this.setActivePanel}) : super(key: key);
+  const BottomBar({
+    Key? key,
+    required this.currentPanelId,
+    required this.setActivePanel,
+  }) : super(key: key);
 
   final void Function(int) setActivePanel;
-  final int currentPanel;
+  final int currentPanelId;
 
-  @override
-  Widget build(BuildContext context) {
-    final items = List<BottomNavigationBarItem>.generate(
+  List<BottomNavigationBarItem> _getItems() {
+    return List<BottomNavigationBarItem>.generate(
       PanelId.values.length,
       (int index) {
         if (index == PanelId.home.index) {
@@ -18,24 +21,30 @@ class BottomBar extends StatelessWidget {
             label: "Home",
           );
         }
-        if (index == PanelId.home.index) {
+        if (index == PanelId.profile.index) {
           return const BottomNavigationBarItem(
             icon: Icon(Icons.account_box),
             label: "Account",
           );
         }
-        throw UnsupportedError("Uknown panel id");
+        return const BottomNavigationBarItem(
+          icon: Icon(Icons.question_mark),
+          label: "Unknown",
+        );
       },
     );
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return BottomNavigationBar(
-      currentIndex: currentPanel,
+      currentIndex: currentPanelId,
       showSelectedLabels: false,
       showUnselectedLabels: false,
       onTap: (index) {
         setActivePanel(index);
       },
-      items: items,
+      items: _getItems(),
     );
   }
 }

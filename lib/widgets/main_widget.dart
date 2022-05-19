@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:todo/models/panel_id.dart';
+import 'package:todo/models/task.dart';
+import 'package:todo/storage.dart';
 import 'package:todo/widgets/add_page.dart';
 import 'package:todo/widgets/bottom_bar.dart';
-import 'package:todo/models/task.dart';
 import 'package:todo/widgets/profile.dart';
-import 'package:todo/storage.dart';
 import 'package:todo/widgets/todo_list.dart';
 
 class MainWidget extends StatefulWidget {
@@ -25,6 +25,10 @@ class _MainWidgetState extends State<MainWidget> {
   }
 
   void setActivePanel(int index) {
+    if (Storage.currentUser == null) {
+      index = PanelId.profile.index;
+    }
+
     setState(() {
       _activePanelId = PanelId.values[index];
     });
@@ -40,26 +44,35 @@ class _MainWidgetState extends State<MainWidget> {
     throw UnsupportedError("Uknown panel id");
   }
 
+  Widget? _getFloatingActionButton() {
+    if (_activePanelId == PanelId.home) {
+      return FloatingActionButton(
+        onPressed: onAddPressed,
+        child: const Icon(Icons.add),
+      );
+    }
+    return null;
+  }
+
   @override
   void initState() {
     super.initState();
-    Storage().onTodoChangedHandler((List<Task> tasks) => {
-          setState(() {
-            _tasks = tasks;
-          })
-        });
+    // Storage().onTodoChangedHandler((List<Task> tasks) => {
+    //       setState(() {
+    //         _tasks = tasks;
+    //       })
+    //     });
   }
 
   @override
   Widget build(BuildContext context) {
+    setActivePanel(_activePanelId.index);
+
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: onAddPressed,
-        child: const Icon(Icons.add),
-      ),
+      floatingActionButton: _getFloatingActionButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       bottomNavigationBar: BottomBar(
-        currentPanel: _activePanelId.index,
+        currentPanelId: _activePanelId.index,
         setActivePanel: setActivePanel,
       ),
       body: _getBody(),
