@@ -18,7 +18,7 @@ class TodoList extends StatelessWidget {
           value: tasks[index].state.isDone,
           title: Text(tasks[index].text),
           onChanged: (value) {
-            Storage().toggleTodoState(tasks[index]);
+            Storage.toggleTaskState(tasks[index]);
           },
         );
       },

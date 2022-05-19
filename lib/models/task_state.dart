@@ -22,9 +22,9 @@ class TaskState {
       _state = _TaskStateEnum.done;
     } else if (_state == _TaskStateEnum.done) {
       _state = _TaskStateEnum.active;
+    } else {
+      throw UnsupportedError("Unkown task state");
     }
-
-    throw UnsupportedError("Unkown task state");
   }
 
   bool get isDone => _state == _TaskStateEnum.done;

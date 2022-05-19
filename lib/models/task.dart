@@ -14,7 +14,11 @@ class Task {
     TaskState? state,
     this.createdAt = ServerValue.timestamp,
   }) {
-    state ??= TaskState();
+    if (state == null) {
+      this.state = TaskState();
+    } else {
+      this.state = state;
+    }
   }
 
   Task.fromJson(

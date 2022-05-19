@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:todo/models/panel_id.dart';
 import 'package:todo/models/task.dart';
@@ -54,14 +55,22 @@ class _MainWidgetState extends State<MainWidget> {
     return null;
   }
 
+  void _updateTasks(List<Task> tasks) {
+    setState(() {
+      _tasks = tasks;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
-    // Storage().onTodoChangedHandler((List<Task> tasks) => {
-    //       setState(() {
-    //         _tasks = tasks;
-    //       })
-    //     });
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user == null) {
+        Storage.cancelTasksSubscribes();
+      } else {
+        Storage.onTasksChangedSubscribe(_updateTasks);
+      }
+    });
   }
 
   @override

@@ -11,7 +11,7 @@ class AddPage extends StatefulWidget {
 
 class _AddPageState extends State<AddPage> {
   void onSubmitted(text) {
-    Storage().addTodoItem(Task(text: text));
+    Storage.addTask(Task(text: text));
     Navigator.pop(context);
   }
 
