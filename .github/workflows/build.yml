@@ -27,19 +27,23 @@ jobs:
         path: |
           build/app/outputs/flutter-apk/app-release.apk
           build/app/outputs/bundle/release/app-release.aab
-  release:
-    needs: apk
+  web:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/download-artifact@v3
+    - uses: actions/checkout@v3
+    - uses: subosito/flutter-action@v2
       with:
-        name: apk
-    - run: find .
-    - name: Release
-      uses: softprops/action-gh-release@v1
-      if: startsWith(github.ref, 'refs/tags/')
+        flutter-version: '2.10.4'
+    - run: flutter pub get
+    - run: flutter test
+    - run: flutter build web
+    - uses: actions/upload-artifact@v3
       with:
-        prerelease: true
-        files: |
-          bundle/release/app-release.aab
-          flutter-apk/app-release.apk
+        name: wen
+        path: |
+          build/web/
+    - name: Deploy Web
+      uses: peaceiris/actions-gh-pages@v3
+      if: ${{ github.ref == 'refs/heads/main' }}
+      with:
+        publish_dir: build/web/
