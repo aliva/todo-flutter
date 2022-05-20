@@ -36,10 +36,10 @@ jobs:
         cache: true
     - run: flutter pub get
     - run: flutter test
-    - run: flutter build web
+    - run: flutter build web --base-href=/todo-flutter/
     - uses: actions/upload-artifact@v3
       with:
-        name: wen
+        name: web
         path: |
           build/web/
     - name: Deploy Web
