@@ -34,4 +34,4 @@ jobs:
     - uses: actions/download-artifact@v3
       with:
         name: apk
-    - run: ls
+    - run: find .
