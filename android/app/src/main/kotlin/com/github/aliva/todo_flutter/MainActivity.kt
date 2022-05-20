@@ -1,4 +1,4 @@
-package com.github.aliva.todo_flutter
+package com.github.aliva.todo
 
 import io.flutter.embedding.android.FlutterActivity
 
