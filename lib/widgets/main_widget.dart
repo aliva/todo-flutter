@@ -69,6 +69,7 @@ class _MainWidgetState extends State<MainWidget> {
         Storage.cancelTasksSubscribes();
       } else {
         Storage.onTasksChangedSubscribe(_updateTasks);
+        setActivePanel(PanelId.home.index);
       }
     });
   }
