@@ -19,8 +19,8 @@ jobs:
         cache: true
     - run: flutter pub get
     - run: flutter test
-    - run: flutter build apk
-    - run: flutter build appbundle
+    - run: flutter build apk --build-number=${GITHUB_RUN_ATTEMPT}
+    - run: flutter build appbundle --build-number=${GITHUB_RUN_ATTEMPT}
     - uses: actions/upload-artifact@v3
       with:
         name: apk
@@ -35,3 +35,10 @@ jobs:
       with:
         name: apk
     - run: find .
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        prerelease: true
+        files: |
+          bundle/release/app-release.aab
+          flutter-apk/app-release.apk
