@@ -27,18 +27,3 @@ jobs:
         path: |
           build/app/outputs/flutter-apk/app-release.apk
           build/app/outputs/bundle/release/app-release.aab
-  release:
-    needs: apk
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/download-artifact@v3
-      with:
-        name: apk
-    - run: find .
-    - name: Release
-      uses: softprops/action-gh-release@v1
-      with:
-        prerelease: true
-        files: |
-          bundle/release/app-release.aab
-          flutter-apk/app-release.apk
