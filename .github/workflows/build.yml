@@ -16,4 +16,7 @@ jobs:
     - run: flutter pub get
     - run: flutter test
     - run: flutter build apk
+      with:
+        name: apk
+        path: build/app/outputs/flutter-apk/
     - run: flutter build appbundle
