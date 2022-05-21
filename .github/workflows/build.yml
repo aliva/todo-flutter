@@ -56,7 +56,7 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: web-files
-      - run: fine .
+      - run: find .
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
