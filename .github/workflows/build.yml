@@ -6,7 +6,7 @@ on:
 permissions:
   contents: write
 jobs:
-  apk:
+  build-apk:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -27,7 +27,7 @@ jobs:
         path: |
           build/app/outputs/flutter-apk/app-release.apk
           build/app/outputs/bundle/release/app-release.aab
-  web:
+  build-web:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -48,3 +48,14 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: build/web/
+  deploy-firebase:
+    needs: build-web
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_TODO_FLUTTER_349512 }}'
+          channelId: live
+          projectId: todo-flutter-349512
