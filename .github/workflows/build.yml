@@ -36,18 +36,12 @@ jobs:
         cache: true
     - run: flutter pub get
     - run: flutter test
-    - run: flutter build web --base-href=/todo-flutter/
+    - run: flutter build web
     - uses: actions/upload-artifact@v3
       with:
         name: web-files
         path: |
           build/web/
-    - name: Deploy Web
-      uses: peaceiris/actions-gh-pages@v3
-      if: ${{ github.ref == 'refs/heads/main' }}
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: build/web/
   deploy-firebase:
     needs: build-web
     runs-on: ubuntu-latest
@@ -57,7 +51,6 @@ jobs:
         with:
           name: web-files
           path: build/web/
-      - run: ls
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
