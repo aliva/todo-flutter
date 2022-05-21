@@ -23,7 +23,7 @@ jobs:
     - run: flutter build appbundle --build-number=${GITHUB_RUN_ATTEMPT}
     - uses: actions/upload-artifact@v3
       with:
-        name: apk
+        name: apk-files
         path: |
           build/app/outputs/flutter-apk/app-release.apk
           build/app/outputs/bundle/release/app-release.aab
@@ -39,7 +39,7 @@ jobs:
     - run: flutter build web --base-href=/todo-flutter/
     - uses: actions/upload-artifact@v3
       with:
-        name: web
+        name: web-files
         path: |
           build/web/
     - name: Deploy Web
@@ -53,6 +53,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v3
+        with:
+          name: web-files
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
