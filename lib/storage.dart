@@ -9,23 +9,23 @@ class Storage {
   static String get _uid => currentUser!.uid;
   static final _taskSubs = <StreamSubscription<DatabaseEvent>>[];
 
-  static void addTask(Task task) {
+  static Future<void> addTask(Task task) async {
     final key = FirebaseDatabase.instance.ref().child("todos/$_uid").push().key;
     DatabaseReference ref = FirebaseDatabase.instance.ref("todos/$_uid/$key");
-    ref.set(task.toJson());
+    await ref.set(task.toJson());
   }
 
-  static void toggleTaskState(Task task) {
+  static Future<void> toggleTaskState(Task task) async {
     DatabaseReference ref = FirebaseDatabase.instance.ref("todos/$_uid/${task.key}");
     task.state.toggleState();
-    ref.update({
+    await ref.update({
       "state": task.state.toString(),
     });
   }
 
-  static void cancelTasksSubscribes() {
+  static Future<void> cancelTasksSubscribes() async {
     for (final sub in _taskSubs) {
-      sub.cancel();
+      await sub.cancel();
     }
     _taskSubs.clear();
   }
