@@ -18,12 +18,9 @@ jobs:
       with:
         cache: true
     - run: flutter pub get
-    - run: echo $KEY_PROPERTIES | base64 --decode > android/key.properties
-    - run: echo $KEY_PROPERTIES
-    - run: echo "TEST"
-    - run: cat android/key.properties
-    - run: echo $KEY_JKS | base64 --decode > android/key.jks
-    - run: ls android
+    - run: |
+        echo ${{ secrets.KEY_PROPERTIES }} | base64 --decode > android/key.properties
+        echo ${{ secrets.$KEY_JKS }} | base64 --decode > android/key.jks
     - run: flutter build apk --build-number=${GITHUB_RUN_ATTEMPT}
     - run: flutter build appbundle --build-number=${GITHUB_RUN_ATTEMPT}
     - uses: actions/upload-artifact@v3
