@@ -24,7 +24,10 @@ class _ProfileState extends State<Profile> {
           return const SignInScreen(
             showAuthActionSwitch: false,
             providerConfigs: [
-              EmailProviderConfiguration(),
+              // EmailProviderConfiguration(),
+              GoogleProviderConfiguration(
+                clientId: "527520411313-t0ttfle5lb00tmfqvm92sn5vd03eapip.apps.googleusercontent.com",
+              ),
             ],
           );
         }
