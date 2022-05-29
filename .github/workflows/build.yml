@@ -19,6 +19,8 @@ jobs:
         cache: true
     - run: flutter pub get
     - run: echo $KEY_PROPERTIES | base64 --decode > android/key.properties
+    - run: echo $KEY_PROPERTIES
+    - run: echo "TEST"
     - run: cat android/key.properties
     - run: echo $KEY_JKS | base64 --decode > android/key.jks
     - run: ls android
