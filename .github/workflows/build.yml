@@ -18,7 +18,8 @@ jobs:
       with:
         cache: true
     - run: flutter pub get
-    - run: |
+    - name: Creating secret files
+      run: |
         echo "$KEY_PROPERTIES" | base64 --decode > android/key.properties
         echo "$KEY_JKS" | base64 --decode > android/key.jks
       env:
