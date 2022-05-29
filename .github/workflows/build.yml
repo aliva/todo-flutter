@@ -22,7 +22,6 @@ jobs:
         echo $KEY_PROPERTIES
         echo $KEY_JKS
         echo $KEY_PROPERTIES | base64 --decode > android/key.properties
-        echo $KEY_JKS | base64 --decode > android/key.jks
       env:
         KEY_PROPERTIES: ${{ secrets.KEY_PROPERTIES }}
         KEY_JKS: ${{ secrets.KEY_JKS }}
