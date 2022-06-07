@@ -18,9 +18,16 @@ class Storage {
   static void toggleTaskState(Task task) async {
     DatabaseReference ref = FirebaseDatabase.instance.ref("todos/$_uid/${task.key}");
     task.state.toggleState();
-    await ref.update({
+
+    Map<String, dynamic> updateMap = {
       "state": task.state.toString(),
-    });
+    };
+    if (task.state.isDone) {
+      updateMap["completed_at"] = ServerValue.timestamp;
+    } else {
+      updateMap["completed_at"] = null;
+    }
+    await ref.update(updateMap);
   }
 
   static void deleteTask(Task task) async {
