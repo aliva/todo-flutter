@@ -28,4 +28,10 @@ class TaskState {
   }
 
   bool get isDone => _state == _TaskStateEnum.done;
+
+  @override
+  bool operator ==(Object other) => other is TaskState && toString() == other.toString();
+
+  @override
+  int get hashCode => super.hashCode;
 }

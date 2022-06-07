@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:todo/models/panel_id.dart';
 import 'package:todo/models/task.dart';
+import 'package:todo/models/task_sort.dart';
 import 'package:todo/storage.dart';
 import 'package:todo/widgets/add_page.dart';
 import 'package:todo/widgets/bottom_bar.dart';
@@ -56,6 +57,7 @@ class _MainWidgetState extends State<MainWidget> {
   }
 
   void _updateTasks(List<Task> tasks) {
+    tasks.sort(TaskSort.defaultOrder);
     setState(() {
       _tasks = tasks;
     });
