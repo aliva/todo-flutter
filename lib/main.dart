@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:todo/prefrences.dart';
 import 'package:todo/widgets/main_widget.dart';
 
 import 'firebase_options.dart';
@@ -10,11 +11,15 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(const MyApp());
+  ThemeMode themeMode = await Prefrences.getTheme();
+
+  runApp(MyApp(themeMode: themeMode));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final ThemeMode themeMode;
+
+  const MyApp({Key? key, required this.themeMode}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +27,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
       home: const MainWidget(),
-      themeMode: ThemeMode.system,
+      themeMode: themeMode,
     );
   }
 }

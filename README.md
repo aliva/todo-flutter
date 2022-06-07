@@ -11,4 +11,26 @@ A simple todo list in flutter, just to play around
 
 ## Screenshots
 
-//TODO
+* Todo List
+
+![](screenshots/list.jpg)
+
+* Swpie right to mark as done
+
+![](screenshots/swipe-right.jpg)
+
+* Swpie left to mark as done
+
+![](screenshots/swipe-left.jpg)
+
+* Adding new task
+
+![](screenshots/new-item.jpg)
+
+* login page
+
+![](screenshots/login.jpg)
+
+* profile page
+
+![](screenshots/profile.jpg)
