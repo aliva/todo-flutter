@@ -5,20 +5,14 @@ class Task {
   final String? key;
   final String text;
   late TaskState state;
-  // ignore: prefer_typing_uninitialized_variables
-  final createdAt;
+  dynamic createdAt;
 
   Task({
     required this.text,
     this.key,
-    TaskState? state,
-    this.createdAt = ServerValue.timestamp,
   }) {
-    if (state == null) {
-      this.state = TaskState();
-    } else {
-      this.state = state;
-    }
+    state = TaskState();
+    createdAt = ServerValue.timestamp;
   }
 
   Task.fromJson(
