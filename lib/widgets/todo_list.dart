@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:todo/models/task.dart';
 import 'package:todo/storage.dart';
 
@@ -14,12 +15,24 @@ class TodoList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
       itemBuilder: (BuildContext context, int index) {
-        return CheckboxListTile(
-          value: tasks[index].state.isDone,
-          title: Text(tasks[index].text),
-          onChanged: (value) {
-            Storage.toggleTaskState(tasks[index]);
-          },
+        return Slidable(
+          key: ObjectKey(tasks[index]),
+          startActionPane: ActionPane(
+            motion: const ScrollMotion(),
+            dismissible: DismissiblePane(
+              onDismissed: () {
+                Storage.toggleTaskState(tasks[index]);
+              },
+            ),
+            children: const [],
+          ),
+          child: CheckboxListTile(
+            value: tasks[index].state.isDone,
+            title: Text(tasks[index].text),
+            onChanged: (value) {
+              Storage.toggleTaskState(tasks[index]);
+            },
+          ),
         );
       },
       separatorBuilder: (BuildContext context, int index) {

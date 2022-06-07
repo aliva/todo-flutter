@@ -38,6 +38,7 @@ dependencies:
   firebase_auth: ^3.3.17
   flutterfire_ui: ^0.4.0+5
   firebase_database: ^9.0.13
+  flutter_slidable: ^1.3.0
 
 dev_dependencies:
   flutter_test:
