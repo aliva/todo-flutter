@@ -15,13 +15,13 @@ A simple todo list in flutter, just to play around
 
 ![](screenshots/list.jpg)
 
-* Swpie right to mark as done
-
-![](screenshots/swipe-right.jpg)
-
 * Swpie left to mark as done
 
 ![](screenshots/swipe-left.jpg)
+
+* Swpie right to delete
+
+![](screenshots/swipe-right.jpg)
 
 * Adding new task
 
